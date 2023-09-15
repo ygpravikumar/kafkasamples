@@ -1,0 +1,45 @@
+server.port: 9090
+spring:
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: "org.hibernate.dialect.MySQL5Dialect"
+        ddl-auto: create
+  datasource:
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
+    url: "jdbc:mysql://localhost:8080/mysql?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
+    username: root
+    password: example
+    hikari:
+      connectionTimeout: 3000
+      idleTimeout: 6000
+      maxLifetime: 1800
+      maximum-pool-size: 10
+      minimum-idle: 5
+      pool-name: ConnPool
+  security:
+    ignored: "/**"
+    user:
+      name: root
+      password: root
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      group-id: "karate"
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+management:
+  security:
+    ignored: "/**"
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+security:
+  ignored: "/**"
+
+spring.jackson.deserialization.FAIL_ON_UNKNOWN_PROPERTIES: false
+spring.jackson.default-property-inclusion: non_null
