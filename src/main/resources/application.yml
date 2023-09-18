@@ -3,13 +3,13 @@ spring:
   jpa:
     generate-ddl: true
     show-sql: true
-    properties:
-      hibernate:
-        dialect: "org.hibernate.dialect.MySQL5Dialect"
-        ddl-auto: create
+    database-platform: "org.hibernate.dialect.MySQL5Dialect"
+    hibernate:
+      dialect: "org.hibernate.dialect.MySQL5Dialect"
+      ddl-auto: update
   datasource:
     driver-class-name: "com.mysql.cj.jdbc.Driver"
-    url: "jdbc:mysql://localhost:8080/mysql?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC"
+    url: "jdbc:mysql://127.0.0.1:3306/persondb"
     username: root
     password: example
     hikari:
@@ -31,15 +31,18 @@ spring:
     consumer:
       group-id: "karate"
       value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+  jackson:
+    deserialization:
+      FAIL_ON_UNKNOWN_PROPERTIES: false
+    default-property-inclusion: non_null
 management:
   security:
-    ignored: "/**"
+    ignored: /**
   endpoints:
     web:
       exposure:
         include: "*"
+    security:
+      ignored: /**
 security:
-  ignored: "/**"
-
-spring.jackson.deserialization.FAIL_ON_UNKNOWN_PROPERTIES: false
-spring.jackson.default-property-inclusion: non_null
+  ignored: /**

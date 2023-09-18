@@ -46,3 +46,48 @@ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic basic-json-to
 {"firstName":"Ravi", "lastName":"G" , "randomProperty": "1"}
 ```
 
+### SQl Commands
+```
+Command to bring docker up:  docker-compose up -d 
+SQL Server details:
+    ui port: 8080
+    url: "jdbc:mysql://127.0.0.1:3306/persondb"
+    username: root
+    password: example
+```
+
+#### process to configure jpa in springboot
+1. Add gradle dependency
+```
+implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.18'
+```
+2. Add sql connection details in app yml
+```
+spring:
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    database-platform: "org.hibernate.dialect.MySQL5Dialect"
+    hibernate:
+      dialect: "org.hibernate.dialect.MySQL5Dialect"
+      ddl-auto: update
+  datasource:
+    driver-class-name: "com.mysql.cj.jdbc.Driver"
+    url: "jdbc:mysql://127.0.0.1:3306/persondb"
+    username: root
+    password: example
+    hikari:
+      <hikari details>
+```
+3. Enable jpa repository
+4. Enable entity scan
+```
+@EnableJpaRepositories("com.example")
+@EntityScan("com.example")
+```
+5. Create entity java object
+6. Create repository java object
+7. Use repository object where needed
+
+
