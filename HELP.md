@@ -31,9 +31,10 @@ These additional references should also help you:
 ### Kafka commands
 https://kafka.apache.org/quickstart
 ```
+Download kafka zip from above link and run below commands once extracted from inside the extracted folder
 bin/zookeeper-server-start.sh config/zookeeper.properties
 Start the Kafka broker service
-$ bin/kafka-server-start.sh config/server.properties
+bin/kafka-server-start.sh config/server.properties
 bin/kafka-topics.sh --create --topic my-topic --bootstrap-server localhost:9092
 bin/kafka-topics.sh --delete --topic basic-json-topic --bootstrap-server localhost:9092
 bin/kafka-topics.sh --create --topic string-topic --bootstrap-server localhost:9092
@@ -48,7 +49,7 @@ bin/kafka-console-producer.sh --broker-list localhost:9092 --topic basic-json-to
 
 ### SQl Commands
 ```
-Command to bring docker up:  docker-compose up -d 
+To bring sql server from sqldocker folder:  docker-compose up -d 
 SQL Server details:
     ui port: 8080
     url: "jdbc:mysql://127.0.0.1:3306/persondb"
@@ -89,5 +90,10 @@ spring:
 5. Create entity java object
 6. Create repository java object
 7. Use repository object where needed
+
+### Local development setup
+1. Bring up kafka 
+2. Bring up sql server
+3. Boot run application
 
 
